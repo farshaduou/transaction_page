@@ -1,0 +1,32 @@
+{
+  "name": "transaction_page",
+  "version": "0.1.0",
+  "description": "Web-based service to accept and settle decentralized transactions (first draft, Bitcoin on-chain only).",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+  },
+  "keywords": [
+    "bitcoin",
+    "payments",
+    "transactions",
+    "web-service"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "uuid": "^11.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "@types/uuid": "^10.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
+  }
+}
