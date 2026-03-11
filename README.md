@@ -21,9 +21,12 @@ In this first draft implementation, **only Bitcoin on-chain transactions are sup
 
 ### Stack
 
-- Node.js + TypeScript
-- Express.js HTTP server
-- Optional integration with a local Bitcoin Core node via JSON-RPC
+- **Node.js + TypeScript** (original implementation)
+  - Express.js HTTP server
+  - Optional integration with a local Bitcoin Core node via JSON-RPC
+- **Python (FastAPI)** implementation
+  - FastAPI app with automatic docs UI (`/docs`, `/redoc`)
+  - Same basic endpoints and behavior as the Node/TS version
 
 ### HTTP API (subject to change)
 
@@ -145,18 +148,41 @@ Optional:
 
 ### Prerequisites
 
-- Node.js (LTS recommended)
-- npm or yarn
+- Node.js (LTS recommended) – for the TypeScript implementation
+- Python 3.10+ – for the FastAPI implementation
 - Optional: a running Bitcoin Core node with RPC enabled
 
-### Install and run
+### Node/TypeScript service
 
 ```bash
 npm install
 npm run dev
 ```
 
-The service will start on `http://localhost:3033` by default.
+The service will start on `http://localhost:3033` by default (or another port if `PORT` is set).
+
+### Python/FastAPI service (with simple UI via docs)
+
+Install dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the FastAPI app with uvicorn (port 3033 is a good default here to avoid 3000 clashes):
+
+```bash
+uvicorn app.main:app --reload --port 3033
+```
+
+Then open in a browser:
+
+- Interactive API docs (Swagger UI): `http://localhost:3033/docs`
+- Alternative docs (ReDoc): `http://localhost:3033/redoc`
+
+You can create transactions and inspect responses directly from the docs UI without writing any client code.
 
 ---
 
