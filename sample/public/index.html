@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample Store • transaction_page</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div>
+          <div class="kicker">Sample website</div>
+          <h1>Checkout (Bitcoin on-chain)</h1>
+          <p class="sub">
+            This is a tiny “integrator” website that calls your
+            <code>transaction_page</code> API to create a transaction, then shows the user
+            payment instructions.
+          </p>
+        </div>
+        <div class="pill" id="healthPill">Checking API…</div>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <h2>Create transaction</h2>
+
+          <form id="createForm" class="form">
+            <label>
+              <span>Amount (sats)</span>
+              <input
+                id="amountSats"
+                name="amountSats"
+                type="number"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                placeholder="100000"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Description (optional)</span>
+              <input
+                id="description"
+                name="description"
+                type="text"
+                placeholder="Invoice #123"
+              />
+            </label>
+
+            <div class="row">
+              <button type="submit" class="btn primary">Create</button>
+              <button type="button" class="btn" id="loadLastBtn">Load last</button>
+              <button type="button" class="btn danger" id="clearBtn">Clear</button>
+            </div>
+          </form>
+
+          <div class="hint">
+            Tip: if you run the transaction service without Bitcoin RPC configured, it will
+            return a mock address like <code>btc-test-…</code>.
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Payment instructions</h2>
+
+          <div id="txEmpty" class="empty">
+            No transaction yet. Create one to display the payment address and status.
+          </div>
+
+          <div id="txPanel" class="tx hidden">
+            <div class="kv">
+              <div class="k">Transaction ID</div>
+              <div class="v mono" id="txId"></div>
+            </div>
+            <div class="kv">
+              <div class="k">Amount</div>
+              <div class="v mono" id="txAmount"></div>
+            </div>
+            <div class="kv">
+              <div class="k">Address</div>
+              <div class="v mono" id="txAddress"></div>
+            </div>
+            <div class="kv">
+              <div class="k">Status</div>
+              <div class="v">
+                <span class="status" id="txStatus"></span>
+              </div>
+            </div>
+
+            <div class="row">
+              <button class="btn" id="refreshBtn" type="button">Refresh status</button>
+              <button class="btn" id="copyAddressBtn" type="button">Copy address</button>
+            </div>
+          </div>
+
+          <pre class="log" id="log"></pre>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="muted">Backend API:</span> <code id="apiBase">(via /api proxy)</code>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+

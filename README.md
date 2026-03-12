@@ -161,6 +161,18 @@ npm run dev
 
 The service will start on `http://localhost:3033` by default (or another port if `PORT` is set).
 
+### Sample website (integrator demo)
+
+There is a minimal “merchant/integrator” website in `sample/` that calls this service’s API to create a transaction and display payment instructions.
+
+Run the API, then in a second terminal:
+
+```bash
+npm run sample
+```
+
+Open `http://localhost:3000`.
+
 ### Python/FastAPI service (with simple UI via docs)
 
 Install dependencies:
