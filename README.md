@@ -165,13 +165,34 @@ The service will start on `http://localhost:3033` by default (or another port if
 
 There is a minimal “merchant/integrator” website in `sample/` that calls this service’s API to create a transaction and display payment instructions.
 
-Run the API, then in a second terminal:
+Run the API, then in a second terminal.
+
+#### Option A: Run the sample with Node
 
 ```bash
 npm run sample
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000` (if `3000` is already in use, the sample will try `3001`, `3002`, etc. and print the final URL).
+
+#### Option B: Run the sample with Python (FastAPI)
+
+```bash
+source .venv/bin/activate
+uvicorn sample.server:app --reload --port 3000
+```
+
+Open `http://localhost:3000` (or choose another `--port`).
+
+#### Point the sample at a different API
+
+By default, both sample runners proxy to `http://localhost:3033`. To point them elsewhere:
+
+```bash
+TRANSACTION_API_BASE="http://localhost:3033" npm run sample
+# or:
+TRANSACTION_API_BASE="http://localhost:3033" uvicorn sample.server:app --reload --port 3000
+```
 
 ### Python/FastAPI service (with simple UI via docs)
 
